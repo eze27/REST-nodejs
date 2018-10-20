@@ -20,9 +20,9 @@ if (process.env.NODE_ENV === 'dev') {
 } else {
     //produccion
     //pass = aVGBaxDVccSJw8y
-    urlDB = 'mongodb://cafe-user:aVGBaxDVccSJw8y@ds223812.mlab.com:23812/cafe_rest';
+    urlDB = process.env.MONGO_URI;
 }
 //mongodb://localhost:27017/cafe
-//mongodb://<dbuser>:<dbpassword>@ds223812.mlab.com:23812/cafe_rest
+
 
 process.env.URLDB = urlDB;
