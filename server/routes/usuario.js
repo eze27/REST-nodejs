@@ -1,9 +1,10 @@
 const express = require('express');
 const app = express();
 const Usuario = require('../models/usuario');
+const { verificaToken, verificaAdmin_Role } = require('../middlewares/autenticacion');
 const bcrypt = require('bcrypt');
 const _ = require('underscore');
-app.get('/usuario', function(req, res) {
+app.get('/usuario', verificaToken, (req, res) => {
     //estos es igual a  /usuario?desde=5
     //desde que registro quiero ver
     let desde = req.query.desde || 0;
@@ -34,7 +35,7 @@ app.get('/usuario', function(req, res) {
 
 });
 
-app.post('/usuario', function(req, res) {
+app.post('/usuario', [verificaToken, verificaAdmin_Role], function(req, res) {
 
     let body = req.body;
     //nueva instancia del objeto usuario 
@@ -63,7 +64,7 @@ app.post('/usuario', function(req, res) {
 
 });
 //para actualizar usuario
-app.put('/usuario/:id', function(req, res) {
+app.put('/usuario/:id', [verificaToken, verificaAdmin_Role], function(req, res) {
     //busca parametros por URl
     let id = req.params.id;
     //son los campos que si se pueden actualizar
@@ -85,7 +86,7 @@ app.put('/usuario/:id', function(req, res) {
 
 });
 
-app.delete('/usuario/:id', function(req, res) {
+app.delete('/usuario/:id', [verificaToken, verificaAdmin_Role], function(req, res) {
 
     let id = req.params.id;
     //objeto a actualizar
