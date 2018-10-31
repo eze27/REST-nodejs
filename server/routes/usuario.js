@@ -4,6 +4,7 @@ const Usuario = require('../models/usuario');
 const { verificaToken, verificaAdmin_Role } = require('../middlewares/autenticacion');
 const bcrypt = require('bcrypt');
 const _ = require('underscore');
+
 app.get('/usuario', verificaToken, (req, res) => {
     //estos es igual a  /usuario?desde=5
     //desde que registro quiero ver
